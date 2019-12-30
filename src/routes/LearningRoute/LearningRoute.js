@@ -29,6 +29,7 @@ class LearningRoute extends Component {
       return res.json();
     })
     .then(res => {
+      console.log(res);
       this.setState({currentWord: res});
     })
   }
@@ -36,7 +37,7 @@ class LearningRoute extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     //get user input
-    const guess = event.target.guess;
+    const guess = event.target['learn-guess-input'].value;
     fetch(`${config.API_ENDPOINT}/language/guess`, {
       method: 'POST',
       headers: {
@@ -44,8 +45,17 @@ class LearningRoute extends Component {
         'authorization': `Bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({guess, currentWord: this.state.currentWord.nextWord})
+    }).then(res => {
+      if(!res.ok) {
+        return res.json().then(e => Promise.reject(e));
+      }
+      return res.json();
     })
-  }
+        .then(res => {
+          console.log(res);
+          this.setState({currentWord: res.nextWord});
+        })
+  };
 
   render() {
     if (this.state.currentWord.nextWord === undefined){
@@ -58,9 +68,9 @@ class LearningRoute extends Component {
           <p>Your total score is: {this.state.currentWord.totalScore}</p>
           <p>You have answered this word correctly {this.state.currentWord.wordCorrectCount} times.</p>
           <p>You have answered this word incorrectly {this.state.currentWord.wordIncorrectCount} times.</p>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <label htmlFor='learn-guess-input'>What's the translation for this word?</label>
-            <input type='text' name='learn-guess-input' id='learn-guess-input' required></input>
+            <input type='text' name='learn-guess-input' id='learn-guess-input' required/>
             <button type='submit'>Submit your answer</button>
           </form>
         </main>
