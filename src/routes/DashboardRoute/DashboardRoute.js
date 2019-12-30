@@ -23,13 +23,16 @@ class DashboardRoute extends Component {
     .then(res => {
       console.log(res);
       //update context
+      this.context.setLanguage(res.language);
+      this.context.setWords(res.words);
+
     })
   }
 
   render() {
     return (
       <section>
-        <h2></h2>
+        <h2>{this.context.language.name}</h2>
       </section>
     );
   }

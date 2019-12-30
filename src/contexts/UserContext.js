@@ -6,7 +6,7 @@ import IdleService from '../services/idle-service'
 const UserContext = React.createContext({
   user: {},
   language: {},
-  words: {},
+  words: [],
   error: null,
   setLanguage: () => {},
   setWords: () => {},
@@ -15,23 +15,23 @@ const UserContext = React.createContext({
   setUser: () => {},
   processLogin: () => {},
   processLogout: () => {},
-})
+});
 
 export default UserContext
 
 export class UserProvider extends Component {
   constructor(props) {
-    super(props)
-    const state = { user: {}, error: null }
+    super(props);
+    const state = { user: {}, language: {}, words: [], error: null };
 
-    const jwtPayload = TokenService.parseAuthToken()
+    const jwtPayload = TokenService.parseAuthToken();
 
     if (jwtPayload)
       state.user = {
         id: jwtPayload.user_id,
         name: jwtPayload.name,
         username: jwtPayload.sub,
-      }
+      };
 
     this.state = state;
     IdleService.setIdleCallback(this.logoutBecauseIdle)
@@ -39,7 +39,7 @@ export class UserProvider extends Component {
 
   componentDidMount() {
     if (TokenService.hasAuthToken()) {
-      IdleService.registerIdleTimerResets()
+      IdleService.registerIdleTimerResets();
       TokenService.queueCallbackBeforeExpiry(() => {
         this.fetchRefreshToken()
       })
@@ -47,22 +47,22 @@ export class UserProvider extends Component {
   }
 
   componentWillUnmount() {
-    IdleService.unRegisterIdleResets()
+    IdleService.unRegisterIdleResets();
     TokenService.clearCallbackBeforeExpiry()
   }
 
   setError = error => {
-    console.error(error)
+    console.error(error);
     this.setState({ error })
-  }
+  };
 
   clearError = () => {
     this.setState({ error: null })
-  }
+  };
 
   setUser = user => {
     this.setState({ user })
-  }
+  };
 
   processLogin = authToken => {
     TokenService.saveAuthToken(authToken)
@@ -71,26 +71,26 @@ export class UserProvider extends Component {
       id: jwtPayload.user_id,
       name: jwtPayload.name,
       username: jwtPayload.sub,
-    })
+    });
     IdleService.registerIdleTimerResets()
     TokenService.queueCallbackBeforeExpiry(() => {
       this.fetchRefreshToken()
     })
-  }
+  };
 
   processLogout = () => {
     TokenService.clearAuthToken()
     TokenService.clearCallbackBeforeExpiry()
     IdleService.unRegisterIdleResets()
     this.setUser({})
-  }
+  };
 
   logoutBecauseIdle = () => {
     TokenService.clearAuthToken()
     TokenService.clearCallbackBeforeExpiry()
     IdleService.unRegisterIdleResets()
     this.setUser({ idle: true })
-  }
+  };
 
   fetchRefreshToken = () => {
     AuthApiService.refreshToken()
@@ -103,18 +103,30 @@ export class UserProvider extends Component {
       .catch(err => {
         this.setError(err)
       })
-  }
+  };
+
+
+  setLanguage = (obj) => {
+    this.setState({language: obj})
+  };
+  setWords = (arr) => {
+    this.setState({words: arr})
+  };
 
   render() {
     const value = {
       user: this.state.user,
       error: this.state.error,
+      language: this.state.language,
+      words: this.state.words,
+      setLanguage: this.setLanguage,
+      setWords: this.setWords,
       setError: this.setError,
       clearError: this.clearError,
       setUser: this.setUser,
       processLogin: this.processLogin,
       processLogout: this.processLogout,
-    }
+    };
     return (
       <UserContext.Provider value={value}>
         {this.props.children}
