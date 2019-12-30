@@ -35,9 +35,10 @@ class DashboardRoute extends Component {
     return (
       <section>
         <h2>{this.context.language.name}</h2>
-        <h3>Score: {this.context.language.total_score}</h3>
-        <ol>{this.context.words.map((word,i) => <li key={i}>{word.original}, {word.correct_count}, {word.incorrect_count}</li>)}</ol>
-        <Link to={'/learn'}>Start Learning</Link>
+        <section>Total correct answers: {this.context.language.total_score}</section>
+        <h3>Words to practice</h3>
+        <ol>{this.context.words.map((word,i) => <li  key={i}><h4>{word.original}</h4><div>correct answer count: {word.correct_count}</div><div>incorrect answer count: {word.incorrect_count}</div></li>)}</ol>
+        <Link to={'/learn'}>Start practicing</Link>
       </section>
     );
   }
