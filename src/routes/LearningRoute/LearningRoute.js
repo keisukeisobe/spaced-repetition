@@ -33,6 +33,20 @@ class LearningRoute extends Component {
     })
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    //get user input
+    const guess = event.target.guess;
+    fetch(`${config.API_ENDPOINT}/language/guess`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `Bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify({guess, currentWord: this.state.currentWord.nextWord})
+    })
+  }
+
   render() {
     if (this.state.currentWord.nextWord === undefined){
       return <p>Loading...</p>
