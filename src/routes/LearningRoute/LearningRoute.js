@@ -8,7 +8,11 @@ class LearningRoute extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentWord: {}
+      currentWord: {},
+      totalScore: '',
+      correctCount: '',
+      inCorrectCount: '',
+      isCorrect: null,
     }
   }
 
@@ -29,8 +33,7 @@ class LearningRoute extends Component {
       return res.json();
     })
     .then(res => {
-      console.log(res);
-      this.setState({currentWord: res});
+      this.setState({currentWord: res, totalScore: res.totalScore, correctCount: res.correctCount, incorrectCount: res.incorrectCount, isCorrect: res.isCorrect});
     })
   }
 
@@ -53,12 +56,12 @@ class LearningRoute extends Component {
     })
         .then(res => {
           console.log(res);
-          this.setState({currentWord: res.nextWord});
+          this.setState({totalScore: res.totalScore, correctCount: res.wordCorrectCount, incorrectCount: res.wordIncorrectCount});
         })
   };
 
   render() {
-    if (this.state.currentWord.nextWord === undefined){
+    if (false){
       return <p>Loading...</p>
     } else {
       return (
@@ -76,7 +79,6 @@ class LearningRoute extends Component {
         </main>
       );
     }
-
   }
 }
 
