@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import UserContext from '../../contexts/UserContext'
 import config from '../../config'
 import TokenService from '../../services/token-service'
-import Button from "../../components/Button/Button";
 import {Link} from "react-router-dom";
 
 class DashboardRoute extends Component {
@@ -23,24 +22,25 @@ class DashboardRoute extends Component {
       return res.json();
     })
     .then(res => {
-      console.log(res);
-      //update context
       this.context.setLanguage(res.language);
       this.context.setWords(res.words);
-
     })
   }
 
   render() {
-    return (
-      <section>
-        <h2>{this.context.language.name}</h2>
-        <section>Total correct answers: {this.context.language.total_score}</section>
-        <h3>Words to practice</h3>
-        <ol>{this.context.words.map((word,i) => <li  key={i}><h4>{word.original}</h4><div>correct answer count: {word.correct_count}</div><div>incorrect answer count: {word.incorrect_count}</div></li>)}</ol>
-        <Link to={'/learn'}>Start practicing</Link>
-      </section>
-    );
+    if (this.context.words.length === 0){
+      return <p>Loading...</p>
+    } else {
+      return (
+        <section>
+          <h2>{this.context.language.name}</h2>
+          <section>Total correct answers: {this.context.language.total_score}</section>
+          <h3>Words to practice</h3>
+          <ol>{this.context.words.map((word,i) => <li  key={i}><h4>{word.original}</h4><div>correct answer count: {word.correct_count}</div><div>incorrect answer count: {word.incorrect_count}</div></li>)}</ol>
+          <Link to={'/learn'}>Start practicing</Link>
+        </section>
+      );
+    }
   }
 }
 
