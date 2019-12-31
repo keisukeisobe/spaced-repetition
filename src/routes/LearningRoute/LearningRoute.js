@@ -100,7 +100,7 @@ class LearningRoute extends Component {
     }
 
     render() {
-        if (false) {
+        if (this.state.currentWord=== '') {
             return <p>Loading...</p>
         } else {
             return (
