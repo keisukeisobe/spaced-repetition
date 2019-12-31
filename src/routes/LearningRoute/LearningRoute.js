@@ -46,27 +46,33 @@ class LearningRoute extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         //get user input
-        const guess = event.target['learn-guess-input'].value;
-        fetch(`${config.API_ENDPOINT}/language/guess`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-                'authorization': `Bearer ${TokenService.getAuthToken()}`,
-            },
-            body: JSON.stringify({guess})
-        }).then(res => {
-            if (!res.ok) {
-                return res.json().then(e => Promise.reject(e));
-            }
-            return res.json();
-        })
-            .then(res => {
-                console.log(res);
-                this.setState({
-                    answer: res.answer, guess, totalScore: res.totalScore, isCorrect: res.isCorrect,
-                    correctCount: res.wordCorrectCount, incorrectCount: res.wordIncorrectCount
-                });
-            })
+        if (this.state.isCorrect === null){
+          const guess = event.target['learn-guess-input'].value;
+          fetch(`${config.API_ENDPOINT}/language/guess`, {
+              method: 'POST',
+              headers: {
+                  'content-type': 'application/json',
+                  'authorization': `Bearer ${TokenService.getAuthToken()}`,
+              },
+              body: JSON.stringify({guess})
+          }).then(res => {
+              if (!res.ok) {
+                  return res.json().then(e => Promise.reject(e));
+              }
+              return res.json();
+          })
+              .then(res => {
+                  console.log(res);
+                  this.setState({
+                      answer: res.answer, guess, totalScore: res.totalScore, isCorrect: res.isCorrect,
+                      correctCount: res.wordCorrectCount, incorrectCount: res.wordIncorrectCount, nextWord: res.nextWord
+                  });
+              })
+        } else {
+          //fetch GET call here?
+          this.setState({isCorrect: null, currentWord: this.state.nextWord.original, correctCount: this.state.nextWord.correctCount, incorrectCount: this.state.nextWord.incorrectCount});
+        } 
+
     };
 
     handleInput(e) {
