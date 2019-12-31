@@ -1,0 +1,33 @@
+.dashboard {
+    text-align: center;
+}
+.wordlist {
+    text-align: left;
+    display: inline-block;
+}
+.dashboard > a {
+    padding: 16px;
+    background-color: #cbcdff;
+    border-radius: 0;
+    cursor: pointer;
+    text-decoration: unset;
+    color: black;
+    display: block;
+}
+.dashboard > a:hover {
+    background-color: #cbcdff99;
+}
+@media (min-width: 600px) {
+    .dashboard > a {
+        border-radius: 10px;
+        margin: 0 30vw;
+        margin-bottom: 16px;
+    }
+}
+@media (min-width: 1200px) {
+    .dashboard > a {
+        border-radius: 10px;
+        margin: 0 40vw;
+        margin-bottom: 16px;
+    }
+}

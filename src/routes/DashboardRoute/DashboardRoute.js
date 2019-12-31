@@ -3,7 +3,7 @@ import UserContext from '../../contexts/UserContext'
 import config from '../../config'
 import TokenService from '../../services/token-service'
 import {Link} from "react-router-dom";
-
+import './Dashboard.css'
 class DashboardRoute extends Component {
   static contextType = UserContext;
 

@@ -1,0 +1,29 @@
+.login-link {
+    text-align: center;
+}
+.LoginForm > div{
+    margin: 16px 0;
+    font-size: medium;
+}
+.LoginForm > div > input {
+    margin-left: 8px;
+    font-size: medium;
+    font-family: "Ubuntu", sans-serif;
+}
+.alert {
+    color: darkred;
+}
+.Button {
+    padding: 16px 32px;
+    background-color: #cbcdff;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 0;
+    text-decoration: unset;
+    font-size: medium;
+    color: black;
+    font-family: "Ubuntu", sans-serif;
+}
+.Button:hover {
+    background-color: #cbcdff99;
+}

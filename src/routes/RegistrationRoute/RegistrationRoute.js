@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import RegistrationForm from '../../components/RegistrationForm/RegistrationForm'
-
+import './Registration.css'
 class RegistrationRoute extends Component {
   static defaultProps = {
     history: {

@@ -1,0 +1,37 @@
+.learning {
+    text-align: center;
+    margin: 0 7%;
+}
+.DisplayFeedback > span{
+    font-size: x-large;
+    text-decoration: underline;
+
+}
+.DisplayFeedback {
+    margin-bottom: 32px;
+}
+.submit-form {
+    margin-top: 32px;
+}
+.submit-form > label {
+    display: block;
+}
+.submit-form > input {
+    display: block;
+    font-size: large;
+    margin: 16px auto;
+    text-align: center;
+}
+.submit-form > button {
+    padding: 16px;
+    background-color: #cbcdff;
+    border-radius: 10px;
+    cursor: pointer;
+    border: unset;
+    color: black;
+
+    font-family: "Ubuntu", sans-serif;
+}
+.submit-form > button:hover {
+    background-color: #cbcdff99;
+}

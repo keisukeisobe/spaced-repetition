@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import UserContext from '../../contexts/UserContext'
 import config from '../../config'
 import TokenService from '../../services/token-service'
-
+import './Learn.css'
 
 class LearningRoute extends Component {
     constructor(props) {
@@ -104,7 +104,7 @@ class LearningRoute extends Component {
             return <p className='loading-text'>Loading...</p>
         } else {
             return (
-                <>
+                <div className='learning'>
                     <div className="DisplayFeedback" aria-live='polite'>
                         <h2>{(this.state.isCorrect !== null) ? (this.state.isCorrect) ? 'You were correct! :D'
                             : 'Good try, but not quite right :('
@@ -130,7 +130,7 @@ class LearningRoute extends Component {
                         </> : <button type='submit'>Try another word!</button>
                         }
                     </form>
-                </>
+                </div>
             );
         }
     }

@@ -1,0 +1,37 @@
+.registration {
+    text-align: center;
+}
+.registration > p {
+    font-size: large;
+    margin: 32px 0;
+}
+.registration-form > div{
+    margin: 16px 0;
+    font-size: medium;
+}
+.registration-form > div > input {
+    margin-left: 8px;
+    font-size: medium;
+    font-family: "Ubuntu", sans-serif;
+}
+.alert {
+    color: darkred;
+}
+.Button {
+    padding: 16px 32px;
+    background-color: #cbcdff;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 0;
+    text-decoration: unset;
+    font-size: medium;
+    color: black;
+    font-family: "Ubuntu", sans-serif;
+}
+.Button:hover {
+    background-color: #cbcdff99;
+}
+footer > a {
+    display: block;
+    margin-top: 16px;
+}

@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import LoginForm from '../../components/LoginForm/LoginForm'
-
+import './Login.css'
 class LoginRoute extends Component {
   static defaultProps = {
     location: {},
     history: {
       push: () => { },
     },
-  }
+  };
 
   handleLoginSuccess = () => {
-    const { location, history } = this.props
-    const destination = (location.state || {}).from || '/'
+    const { location, history } = this.props;
+    const destination = (location.state || {}).from || '/';
     history.push(destination)
-  }
+  };
 
   render() {
     return (
