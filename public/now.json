@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "name": "spaced-repetition",
+  "routes": [
+      { "handle": "filesystem" },
+      { "src": "/.*", "dest": "/index.html" }
+  ]
+}
