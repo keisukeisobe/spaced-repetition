@@ -70,7 +70,25 @@ class LearningRoute extends Component {
               })
         } else {
           //fetch GET call here?
-          this.setState({isCorrect: null, currentWord: this.state.nextWord.original, correctCount: this.state.nextWord.correctCount, incorrectCount: this.state.nextWord.incorrectCount});
+            fetch(`${config.API_ENDPOINT}/language/head`, {
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${TokenService.getAuthToken()}`,
+                },
+            })
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json().then(e => Promise.reject(e));
+                    }
+                    return res.json();
+                })
+                .then(res => {
+                    this.setState({
+                        currentWord: res.nextWord, totalScore: res.totalScore, correctCount: res.wordCorrectCount,
+                        incorrectCount: res.wordIncorrectCount, isCorrect: null, answer: '', guess: '', nextWord: ''
+                    });
+                })
         } 
 
     };
