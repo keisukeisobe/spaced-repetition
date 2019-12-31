@@ -85,7 +85,9 @@ class LearningRoute extends Component {
                 })
                 .then(res => {
                     this.setState({
-                        currentWord: res.nextWord, totalScore: res.totalScore, correctCount: res.wordCorrectCount,
+                        currentWord: this.state.nextWord,
+                        //totalScore: res.totalScore,
+                        correctCount: res.wordCorrectCount,
                         incorrectCount: res.wordIncorrectCount, isCorrect: null, answer: '', guess: '', nextWord: ''
                     });
                 })
@@ -108,8 +110,8 @@ class LearningRoute extends Component {
                         <h2>{(this.state.isCorrect !== null) ? (this.state.isCorrect) ? 'You were correct! :D'
                             : 'Good try, but not quite right :('
                             : 'Translate the word:'}</h2>
+                        <span>{this.state.currentWord}</span>
                     </div>
-                    <span>{this.state.currentWord}</span>
                     <div className='DisplayScore'><p>Your total score is: {this.state.totalScore}</p></div>
                     <p>You have answered this word correctly {this.state.correctCount} times.</p>
                     <p>You have answered this word incorrectly {this.state.incorrectCount} times.</p>
