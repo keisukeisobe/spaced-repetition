@@ -32,11 +32,11 @@ class DashboardRoute extends Component {
       return <p>Loading...</p>
     } else {
       return (
-        <section>
+        <section className='dashboard'>
           <h2>{this.context.language.name}</h2>
           <section>Total correct answers: {this.context.language.total_score}</section>
           <h3>Words to practice</h3>
-          <ol>{this.context.words.map((word,i) => <li  key={i}><h4>{word.original}</h4><div>correct answer count: {word.correct_count}</div><div>incorrect answer count: {word.incorrect_count}</div></li>)}</ol>
+          <ol className='wordlist'>{this.context.words.map((word,i) => <li className='word' key={i}><h4>{word.original}</h4><div>correct answer count: {word.correct_count}</div><div>incorrect answer count: {word.incorrect_count}</div></li>)}</ol>
           <Link to={'/learn'}>Start practicing</Link>
         </section>
       );

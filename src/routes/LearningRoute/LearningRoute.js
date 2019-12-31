@@ -101,25 +101,27 @@ class LearningRoute extends Component {
 
     render() {
         if (this.state.currentWord=== '') {
-            return <p>Loading...</p>
+            return <p className='loading-text'>Loading...</p>
         } else {
             return (
                 <>
-
-                    <div className="DisplayFeedback">
+                    <div className="DisplayFeedback" aria-live='polite'>
                         <h2>{(this.state.isCorrect !== null) ? (this.state.isCorrect) ? 'You were correct! :D'
                             : 'Good try, but not quite right :('
                             : 'Translate the word:'}</h2>
                         <span>{this.state.currentWord}</span>
                     </div>
-                    <div className='DisplayScore'><p>Your total score is: {this.state.totalScore}</p></div>
-                    <p>You have answered this word correctly {this.state.correctCount} times.</p>
-                    <p>You have answered this word incorrectly {this.state.incorrectCount} times.</p>
-                    {(this.state.isCorrect !== null) ? <div className='DisplayFeedback'><p>The correct translation
+                    <div className='DisplayScore' aria-live='polite'>
+                        <p>Your total score is: {this.state.totalScore}</p>
+                    </div>
+                    <div className='DisplayWordScore' aria-live='polite'>
+                        <p>You have answered this word correctly {this.state.correctCount} times.</p>
+                        <p>You have answered this word incorrectly {this.state.incorrectCount} times.</p>
+                    </div>
+                    {(this.state.isCorrect !== null) ? <div className='DisplayFeedback' aria-live='polite'><p>The correct translation
                         for {this.state.currentWord} was {this.state.answer} and you chose {this.state.guess}!</p>
                     </div> : ''}
-                    <form onSubmit={this.handleSubmit}>
-
+                    <form className='submit-form' onSubmit={this.handleSubmit} aria-live='polite'>
                         {(this.state.isCorrect === null) ? <>
                             <label htmlFor='learn-guess-input'>What's the translation for this word?</label>
                             <input type='text' name='learn-guess-input' id='learn-guess-input'
@@ -128,11 +130,10 @@ class LearningRoute extends Component {
                         </> : <button type='submit'>Try another word!</button>
                         }
                     </form>
-
                 </>
             );
         }
     }
 }
 
-export default LearningRoute
+export default LearningRoute;
