@@ -104,7 +104,7 @@ class LearningRoute extends Component {
             return <p>Loading...</p>
         } else {
             return (
-                <main>
+                <>
 
                     <div className="DisplayFeedback">
                         <h2>{(this.state.isCorrect !== null) ? (this.state.isCorrect) ? 'You were correct! :D'
@@ -129,7 +129,7 @@ class LearningRoute extends Component {
                         }
                     </form>
 
-                </main>
+                </>
             );
         }
     }
